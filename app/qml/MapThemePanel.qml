@@ -8,6 +8,7 @@ import "."  // import InputStyle singleton
 Drawer {
 
     property int activeThemeIndex: 0
+    property string activeMapThemeName: __mapThemesModel.data(__mapThemesModel.index(activeThemeIndex), MapThemesModel.Name)
 
     id: mapThemePanel
     visible: false
@@ -18,6 +19,7 @@ Drawer {
     background: Rectangle {
         color: InputStyle.clrPanelMain
     }
+
     Rectangle {
         id: header
         height: InputStyle.rowHeightHeader
@@ -83,9 +85,9 @@ Drawer {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    __mapThemesModel.applyTheme(name)
-                    activeThemeIndex = index
-                    mapThemePanel.close()
+                   activeThemeIndex = index
+                   activeThemeIndexChanged()
+                   mapThemePanel.close()
                 }
             }
 
