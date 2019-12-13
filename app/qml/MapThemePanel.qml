@@ -7,8 +7,7 @@ import "."  // import InputStyle singleton
 
 Drawer {
 
-    property int activeThemeIndex: 0
-    property string activeMapThemeName: __mapThemesModel.data(__mapThemesModel.index(activeThemeIndex), MapThemesModel.Name)
+    property string activeMapThemeName: __mapThemesModel.data(__mapThemesModel.index(__mapThemesModel.activeThemeIndex), MapThemesModel.Name)
 
     id: mapThemePanel
     visible: false
@@ -85,8 +84,7 @@ Drawer {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                   activeThemeIndex = index
-                   activeThemeIndexChanged()
+                  __mapThemesModel.activeThemeIndex = index
                    mapThemePanel.close()
                 }
             }
@@ -98,8 +96,8 @@ Drawer {
                 imageSource: "map_styles.svg"
                 anchors.rightMargin: panelMargin
                 anchors.leftMargin: panelMargin
-                highlight: activeThemeIndex === index
-                showBorder: activeThemeIndex - 1 !== index
+                highlight: __mapThemesModel.activeThemeIndex === index
+                showBorder: __mapThemesModel.activeThemeIndex - 1 !== index
             }
         }
 
